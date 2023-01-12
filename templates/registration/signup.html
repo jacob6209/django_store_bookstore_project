@@ -4,10 +4,14 @@
 {% block page_title %}SignUp{% endblock %}
 
 {% block content %}
+    <br>
+    <h1>SignUp</h1>
+    <br>
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}
     <button class="btn-success" type="submit"> SignUp </button>
     </form>
+   <a href="{% url "login" %}"> LogIn </a>
 
 {% endblock %}

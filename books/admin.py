@@ -4,7 +4,7 @@ from .models import Comment
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user','book','text','datetime_create',)
+    list_display = ('user','bok','text','datetime_create',)
 
 
 admin.site.register(book)

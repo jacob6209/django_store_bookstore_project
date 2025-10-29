@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="book",
+            model_name="Book",
             name="cover",
             field=models.ImageField(blank=True, upload_to="covers/"),
         ),

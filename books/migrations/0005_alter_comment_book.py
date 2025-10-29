@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name="comment",
-            name="book",
+            name="Book",
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="comments",
-                to="books.book",
+                to="books.Book",
             ),
         ),
     ]

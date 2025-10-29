@@ -1,34 +1,33 @@
 from django.views import generic
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, render
-from .models import book
+from .models import Book
 from .forms import CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 
 class BookListView(generic.ListView):
-    model = book
+    model = Book
     paginate_by = 6
     template_name = "books/book_list.html"
     context_object_name = 'books'
 
 
 # class BookDetailView(generic.DetailView):
-#     model = book
+#     model = Book
 #     template_name = 'books/book_detail.html'
 @login_required()
 def book_detail_view(request, pk):
-    # get book object
-    bok = get_object_or_404(book, pk=pk)
-    # get book comments
-    book_comments = bok.comments.all()
-
+    # get Book object
+    book = get_object_or_404(Book, pk=pk)
+    # get Book comments
+    book_comments = book.comments.all()
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.bok = bok
+            new_comment.book = book
             new_comment.user = request.user
             new_comment.save()
             comment_form=CommentForm()
@@ -36,25 +35,25 @@ def book_detail_view(request, pk):
         comment_form = CommentForm()
 
     return render(request, 'books/book_detail.html',
-                  {'book': bok,
+                  {'book': book,
                    'comments': book_comments,
                    'comment_form': comment_form
                    })
 
 
 class BookCreateView(LoginRequiredMixin,generic.CreateView):
-    model = book
+    model = Book
     fields = ['title', 'author', 'description', 'price', 'cover']
     template_name = 'books/book_create.html'
 
 
 class BookUpdateView(LoginRequiredMixin,generic.UpdateView):
-    model = book
+    model = Book
     fields = ['title', 'author', 'description', 'price', 'cover']
     template_name = 'books/book_update.html'
 
 
 class BookDeleteView(LoginRequiredMixin,generic.DeleteView):
-    model = book
+    model = Book
     template_name = 'books/book_delete.html'
     success_url = reverse_lazy("book_list")

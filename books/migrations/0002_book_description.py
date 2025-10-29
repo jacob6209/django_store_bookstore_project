@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="book",
+            model_name="Book",
             name="description",
             field=models.TextField(default=1),
             preserve_default=False,

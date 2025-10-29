@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 
 
-class book(models.Model):
+class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     description = models.TextField()
@@ -19,7 +19,7 @@ class book(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    bok = models.ForeignKey(book, on_delete=models.CASCADE, related_name='comments')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
     text = models.TextField()
 
     is_active = models.BooleanField(default=True)

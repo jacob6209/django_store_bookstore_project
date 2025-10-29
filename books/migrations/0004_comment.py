@@ -28,9 +28,9 @@ class Migration(migrations.Migration):
                 ("text", models.TextField()),
                 ("datetime_create", models.DateTimeField(auto_now_add=True)),
                 (
-                    "book",
+                    "Book",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="books.book"
+                        on_delete=django.db.models.deletion.CASCADE, to="books.Book"
                     ),
                 ),
                 (
